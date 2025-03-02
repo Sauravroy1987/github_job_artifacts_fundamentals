@@ -30,7 +30,7 @@ jobs:
         with:
           name: dist-files #Name of artifacts, to reference update artifacts
           path: |
-            dist
+            dist1
             package.json
   deploy:
     needs: build
