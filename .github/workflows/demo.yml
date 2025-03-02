@@ -29,12 +29,21 @@ jobs:
         uses: actions/upload-artifact@v4 #Search in Google, 'Github actions upload artifact'
         with:
           name: dist-files #Name of artifacts, to reference update artifacts
-          path: |
-            dist1
+          path:
+            | # List of files/folder name from application code, we want to store as Artifacts
+            dist
             package.json
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Get build artifacts
+        uses:
+          actions/download-artifact@v4 #Download the files/folders from above job in Deploy job
+          # It's unzip the folder also
+        with:
+          name: dist-files #Name of the artifacts from above job
+      - name: Output Contents
+        run: ls #Display list of downloaded folder, files
       - name: Deploy
         run: echo "Deploying..."
